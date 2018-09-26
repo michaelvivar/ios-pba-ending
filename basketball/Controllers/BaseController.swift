@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  BaseController.swift
 //  basketball
 //
 //  Created by Michael Vivar on 24/09/2018.
@@ -8,13 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class BaseController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        view.backgroundColor = UIColor.white
+        
     }
 
+    /*
+    // MARK: - Navigation
+    */
 
 }
 

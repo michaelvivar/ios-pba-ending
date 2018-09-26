@@ -14,9 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        window = UIWindow()
+        window?.makeKeyAndVisible()
+        let controller = MainController()
+        window?.rootViewController = UINavigationController(rootViewController: controller)
+        controller.cards = DataManager.all(Card.self)
+        DataManager.delegate = controller
+        
         return true
     }
 
