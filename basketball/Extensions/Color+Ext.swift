@@ -38,4 +38,8 @@ extension UIColor {
     class func blue() -> UIColor {
         return UIColor.Hex("032E50")
     }
+    
+    class func orange() -> UIColor {
+        return UIColor.Hex("CA4E34")
+    }
 }

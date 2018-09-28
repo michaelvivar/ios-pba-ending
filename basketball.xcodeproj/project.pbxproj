@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C67D23E0215A3B61008B6790 /* SlotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D23DF215A3B61008B6790 /* SlotModel.swift */; };
-		C67D23E2215A3D42008B6790 /* LogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D23E1215A3D42008B6790 /* LogModel.swift */; };
-		C67D23E4215AF84C008B6790 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D23E3215AF84C008B6790 /* TableController.swift */; };
+		8DCB0A0CDD1578165D4E9462 /* Pods_basketball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4152BD0BEE559766DC59339 /* Pods_basketball.framework */; };
+		C67D23E0215A3B61008B6790 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D23DF215A3B61008B6790 /* Slot.swift */; };
+		C67D23E2215A3D42008B6790 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D23E1215A3D42008B6790 /* Log.swift */; };
+		C67D23E4215AF84C008B6790 /* Table+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D23E3215AF84C008B6790 /* Table+Controller.swift */; };
 		C67D23E9215AFFE5008B6790 /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D23E8215AFFE5008B6790 /* CardController.swift */; };
 		C67D23EC215B00D5008B6790 /* UITableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D23EB215B00D5008B6790 /* UITableRowView.swift */; };
 		C67D23EF215B0132008B6790 /* UICardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D23EE215B0132008B6790 /* UICardHeaderView.swift */; };
@@ -23,23 +24,38 @@
 		C67D2401215B0872008B6790 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2400215B0872008B6790 /* View+Ext.swift */; };
 		C67D2405215B1A15008B6790 /* UICardPrizesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2404215B1A15008B6790 /* UICardPrizesLabel.swift */; };
 		C67D2407215B2C05008B6790 /* UICardRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2406215B2C05008B6790 /* UICardRowView.swift */; };
+		C67D2409215BB7F2008B6790 /* Prizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2408215BB7F2008B6790 /* Prizes.swift */; };
+		C67D240B215BBE0C008B6790 /* UILogRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D240A215BBE0C008B6790 /* UILogRowView.swift */; };
+		C67D240D215BC05D008B6790 /* Label+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D240C215BC05D008B6790 /* Label+Ext.swift */; };
+		C67D240F215C45F2008B6790 /* FormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D240E215C45F2008B6790 /* FormController.swift */; };
+		C67D2415215CA93C008B6790 /* Card+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2414215CA93C008B6790 /* Card+Ext.swift */; };
+		C67D2417215CA96D008B6790 /* Slot+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2416215CA96D008B6790 /* Slot+Ext.swift */; };
+		C67D2419215CAC00008B6790 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C67D2418215CAC00008B6790 /* GoogleService-Info.plist */; };
+		C67D241C215CD337008B6790 /* Log+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D241B215CD337008B6790 /* Log+Ext.swift */; };
+		C67D241F215D3637008B6790 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D241E215D3637008B6790 /* DataManager.swift */; };
+		C67D2421215D366C008B6790 /* Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2420215D366C008B6790 /* Firestore.swift */; };
+		C67D2424215D36B0008B6790 /* CardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2423215D36B0008B6790 /* CardRepository.swift */; };
+		C67D2426215D36D1008B6790 /* SlotRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2425215D36D1008B6790 /* SlotRepository.swift */; };
+		C67D2428215D36F1008B6790 /* LogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2427215D36F1008B6790 /* LogRepository.swift */; };
+		C67D242A215D99B4008B6790 /* Application+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2429215D99B4008B6790 /* Application+Ext.swift */; };
+		C67D242C215EF014008B6790 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D242B215EF014008B6790 /* Game.swift */; };
 		C692D62021591F7F00EEB23D /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D61F21591F7F00EEB23D /* Color+Ext.swift */; };
-		C692D6242159227400EEB23D /* ViewController+Navigation+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D6232159227400EEB23D /* ViewController+Navigation+Ext.swift */; };
-		C692D6262159239E00EEB23D /* ViewController+StatusBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D6252159239E00EEB23D /* ViewController+StatusBar+Ext.swift */; };
+		C692D6242159227400EEB23D /* ViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D6232159227400EEB23D /* ViewController+Ext.swift */; };
 		C692D628215924E400EEB23D /* LogsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D627215924E400EEB23D /* LogsController.swift */; };
-		C692D62B2159273F00EEB23D /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D62A2159273F00EEB23D /* CardModel.swift */; };
-		C692D62D215930DC00EEB23D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D62C215930DC00EEB23D /* Store.swift */; };
+		C692D62B2159273F00EEB23D /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D62A2159273F00EEB23D /* Card.swift */; };
 		C6F0E33821591C5100719738 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F0E33721591C5100719738 /* AppDelegate.swift */; };
 		C6F0E34221591C5200719738 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6F0E34121591C5200719738 /* Assets.xcassets */; };
 		C6F0E34521591C5200719738 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6F0E34321591C5200719738 /* LaunchScreen.storyboard */; };
 		C6F0E34E21591CF600719738 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F0E34D21591CF600719738 /* MainController.swift */; };
-		C6F0E35021591D2E00719738 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F0E34F21591D2E00719738 /* BaseController.swift */; };
+		C6F0E35021591D2E00719738 /* Base+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F0E34F21591D2E00719738 /* Base+Controller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C67D23DF215A3B61008B6790 /* SlotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotModel.swift; sourceTree = "<group>"; };
-		C67D23E1215A3D42008B6790 /* LogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogModel.swift; sourceTree = "<group>"; };
-		C67D23E3215AF84C008B6790 /* TableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
+		0363F210F0227A82864F722E /* Pods-basketball.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-basketball.debug.xcconfig"; path = "Pods/Target Support Files/Pods-basketball/Pods-basketball.debug.xcconfig"; sourceTree = "<group>"; };
+		376175336AF595720E8D9EE5 /* Pods-basketball.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-basketball.release.xcconfig"; path = "Pods/Target Support Files/Pods-basketball/Pods-basketball.release.xcconfig"; sourceTree = "<group>"; };
+		C67D23DF215A3B61008B6790 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
+		C67D23E1215A3D42008B6790 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		C67D23E3215AF84C008B6790 /* Table+Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Table+Controller.swift"; sourceTree = "<group>"; };
 		C67D23E8215AFFE5008B6790 /* CardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
 		C67D23EB215B00D5008B6790 /* UITableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableRowView.swift; sourceTree = "<group>"; };
 		C67D23EE215B0132008B6790 /* UICardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICardHeaderView.swift; sourceTree = "<group>"; };
@@ -53,19 +69,33 @@
 		C67D2400215B0872008B6790 /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		C67D2404215B1A15008B6790 /* UICardPrizesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICardPrizesLabel.swift; sourceTree = "<group>"; };
 		C67D2406215B2C05008B6790 /* UICardRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICardRowView.swift; sourceTree = "<group>"; };
+		C67D2408215BB7F2008B6790 /* Prizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prizes.swift; sourceTree = "<group>"; };
+		C67D240A215BBE0C008B6790 /* UILogRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILogRowView.swift; sourceTree = "<group>"; };
+		C67D240C215BC05D008B6790 /* Label+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Ext.swift"; sourceTree = "<group>"; };
+		C67D240E215C45F2008B6790 /* FormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormController.swift; sourceTree = "<group>"; };
+		C67D2414215CA93C008B6790 /* Card+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+Ext.swift"; sourceTree = "<group>"; };
+		C67D2416215CA96D008B6790 /* Slot+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Slot+Ext.swift"; sourceTree = "<group>"; };
+		C67D2418215CAC00008B6790 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C67D241B215CD337008B6790 /* Log+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Log+Ext.swift"; sourceTree = "<group>"; };
+		C67D241E215D3637008B6790 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		C67D2420215D366C008B6790 /* Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestore.swift; sourceTree = "<group>"; };
+		C67D2423215D36B0008B6790 /* CardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRepository.swift; sourceTree = "<group>"; };
+		C67D2425215D36D1008B6790 /* SlotRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotRepository.swift; sourceTree = "<group>"; };
+		C67D2427215D36F1008B6790 /* LogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRepository.swift; sourceTree = "<group>"; };
+		C67D2429215D99B4008B6790 /* Application+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Application+Ext.swift"; sourceTree = "<group>"; };
+		C67D242B215EF014008B6790 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		C692D61F21591F7F00EEB23D /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
-		C692D6232159227400EEB23D /* ViewController+Navigation+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Navigation+Ext.swift"; sourceTree = "<group>"; };
-		C692D6252159239E00EEB23D /* ViewController+StatusBar+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+StatusBar+Ext.swift"; sourceTree = "<group>"; };
+		C692D6232159227400EEB23D /* ViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Ext.swift"; sourceTree = "<group>"; };
 		C692D627215924E400EEB23D /* LogsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsController.swift; sourceTree = "<group>"; };
-		C692D62A2159273F00EEB23D /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
-		C692D62C215930DC00EEB23D /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
-		C6F0E33421591C5100719738 /* basketball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = basketball.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C692D62A2159273F00EEB23D /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		C6F0E33421591C5100719738 /* PBA Ending.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PBA Ending.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F0E33721591C5100719738 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6F0E34121591C5200719738 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6F0E34421591C5200719738 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C6F0E34621591C5200719738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6F0E34D21591CF600719738 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
-		C6F0E34F21591D2E00719738 /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
+		C6F0E34F21591D2E00719738 /* Base+Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Base+Controller.swift"; sourceTree = "<group>"; };
+		F4152BD0BEE559766DC59339 /* Pods_basketball.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_basketball.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,19 +103,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DCB0A0CDD1578165D4E9462 /* Pods_basketball.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8DEE29ED7EE75671BF38E37D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F4152BD0BEE559766DC59339 /* Pods_basketball.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C67D23E5215AFCAF008B6790 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				C67D23ED215B00EC008B6790 /* Card */,
 				C67D23EA215B0099008B6790 /* Table */,
-				C67D23F6215B01E4008B6790 /* UIBaseLabel.swift */,
-				C67D23FC215B03ED008B6790 /* UIDateTimeLabel.swift */,
+				C67D241A215CBA9B008B6790 /* Label */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -95,6 +133,7 @@
 			children = (
 				C67D23EB215B00D5008B6790 /* UITableRowView.swift */,
 				C67D2406215B2C05008B6790 /* UICardRowView.swift */,
+				C67D240A215BBE0C008B6790 /* UILogRowView.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -112,14 +151,44 @@
 			path = Card;
 			sourceTree = "<group>";
 		};
+		C67D241A215CBA9B008B6790 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				C67D23F6215B01E4008B6790 /* UIBaseLabel.swift */,
+				C67D23FC215B03ED008B6790 /* UIDateTimeLabel.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		C67D241D215D3617008B6790 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C67D2422215D369C008B6790 /* Repositories */,
+				C67D241E215D3637008B6790 /* DataManager.swift */,
+				C67D2420215D366C008B6790 /* Firestore.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C67D2422215D369C008B6790 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				C67D2423215D36B0008B6790 /* CardRepository.swift */,
+				C67D2425215D36D1008B6790 /* SlotRepository.swift */,
+				C67D2427215D36F1008B6790 /* LogRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		C692D61E21591F6100EEB23D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				C692D61F21591F7F00EEB23D /* Color+Ext.swift */,
-				C692D6232159227400EEB23D /* ViewController+Navigation+Ext.swift */,
-				C692D6252159239E00EEB23D /* ViewController+StatusBar+Ext.swift */,
+				C692D6232159227400EEB23D /* ViewController+Ext.swift */,
 				C67D23FE215B048E008B6790 /* System+Ext.swift */,
 				C67D2400215B0872008B6790 /* View+Ext.swift */,
+				C67D240C215BC05D008B6790 /* Label+Ext.swift */,
+				C67D2429215D99B4008B6790 /* Application+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -127,9 +196,14 @@
 		C692D6292159272200EEB23D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C692D62A2159273F00EEB23D /* CardModel.swift */,
-				C67D23DF215A3B61008B6790 /* SlotModel.swift */,
-				C67D23E1215A3D42008B6790 /* LogModel.swift */,
+				C692D62A2159273F00EEB23D /* Card.swift */,
+				C67D23DF215A3B61008B6790 /* Slot.swift */,
+				C67D23E1215A3D42008B6790 /* Log.swift */,
+				C67D2408215BB7F2008B6790 /* Prizes.swift */,
+				C67D2414215CA93C008B6790 /* Card+Ext.swift */,
+				C67D2416215CA96D008B6790 /* Slot+Ext.swift */,
+				C67D241B215CD337008B6790 /* Log+Ext.swift */,
+				C67D242B215EF014008B6790 /* Game.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -139,13 +213,15 @@
 			children = (
 				C6F0E33621591C5100719738 /* basketball */,
 				C6F0E33521591C5100719738 /* Products */,
+				CD5FC5B790DAD4065F60C7B7 /* Pods */,
+				8DEE29ED7EE75671BF38E37D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		C6F0E33521591C5100719738 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C6F0E33421591C5100719738 /* basketball.app */,
+				C6F0E33421591C5100719738 /* PBA Ending.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,15 +229,16 @@
 		C6F0E33621591C5100719738 /* basketball */ = {
 			isa = PBXGroup;
 			children = (
+				C67D241D215D3617008B6790 /* Data */,
 				C67D23E5215AFCAF008B6790 /* UI */,
 				C692D6292159272200EEB23D /* Models */,
 				C692D61E21591F6100EEB23D /* Extensions */,
 				C6F0E34C21591CCA00719738 /* Controllers */,
+				C67D2418215CAC00008B6790 /* GoogleService-Info.plist */,
 				C6F0E33721591C5100719738 /* AppDelegate.swift */,
 				C6F0E34121591C5200719738 /* Assets.xcassets */,
 				C6F0E34321591C5200719738 /* LaunchScreen.storyboard */,
 				C6F0E34621591C5200719738 /* Info.plist */,
-				C692D62C215930DC00EEB23D /* Store.swift */,
 			);
 			path = basketball;
 			sourceTree = "<group>";
@@ -169,13 +246,23 @@
 		C6F0E34C21591CCA00719738 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C6F0E34F21591D2E00719738 /* BaseController.swift */,
+				C6F0E34F21591D2E00719738 /* Base+Controller.swift */,
+				C67D23E3215AF84C008B6790 /* Table+Controller.swift */,
 				C6F0E34D21591CF600719738 /* MainController.swift */,
 				C692D627215924E400EEB23D /* LogsController.swift */,
-				C67D23E3215AF84C008B6790 /* TableController.swift */,
 				C67D23E8215AFFE5008B6790 /* CardController.swift */,
+				C67D240E215C45F2008B6790 /* FormController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CD5FC5B790DAD4065F60C7B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0363F210F0227A82864F722E /* Pods-basketball.debug.xcconfig */,
+				376175336AF595720E8D9EE5 /* Pods-basketball.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,9 +272,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C6F0E34921591C5200719738 /* Build configuration list for PBXNativeTarget "basketball" */;
 			buildPhases = (
+				7B6F364B86DCA562469AB232 /* [CP] Check Pods Manifest.lock */,
 				C6F0E33021591C5000719738 /* Sources */,
 				C6F0E33121591C5000719738 /* Frameworks */,
 				C6F0E33221591C5000719738 /* Resources */,
+				9C070C36D2724F41ED78B660 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -195,7 +284,7 @@
 			);
 			name = basketball;
 			productName = basketball;
-			productReference = C6F0E33421591C5100719738 /* basketball.app */;
+			productReference = C6F0E33421591C5100719738 /* PBA Ending.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -238,37 +327,117 @@
 			files = (
 				C6F0E34521591C5200719738 /* LaunchScreen.storyboard in Resources */,
 				C6F0E34221591C5200719738 /* Assets.xcassets in Resources */,
+				C67D2419215CAC00008B6790 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7B6F364B86DCA562469AB232 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-basketball-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C070C36D2724F41ED78B660 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-basketball/Pods-basketball-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-basketball/Pods-basketball-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C6F0E33021591C5000719738 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C67D2417215CA96D008B6790 /* Slot+Ext.swift in Sources */,
+				C67D2409215BB7F2008B6790 /* Prizes.swift in Sources */,
 				C67D2407215B2C05008B6790 /* UICardRowView.swift in Sources */,
 				C67D23F1215B015B008B6790 /* UICardContentView.swift in Sources */,
 				C67D23FD215B03ED008B6790 /* UIDateTimeLabel.swift in Sources */,
-				C67D23E4215AF84C008B6790 /* TableController.swift in Sources */,
+				C67D23E4215AF84C008B6790 /* Table+Controller.swift in Sources */,
+				C67D241C215CD337008B6790 /* Log+Ext.swift in Sources */,
 				C67D23FF215B048E008B6790 /* System+Ext.swift in Sources */,
 				C67D23F5215B019E008B6790 /* UICardCellView.swift in Sources */,
-				C692D6262159239E00EEB23D /* ViewController+StatusBar+Ext.swift in Sources */,
 				C67D23F9215B0374008B6790 /* UICardCellLabel.swift in Sources */,
+				C67D2421215D366C008B6790 /* Firestore.swift in Sources */,
+				C67D2424215D36B0008B6790 /* CardRepository.swift in Sources */,
+				C67D2426215D36D1008B6790 /* SlotRepository.swift in Sources */,
+				C67D240F215C45F2008B6790 /* FormController.swift in Sources */,
 				C6F0E34E21591CF600719738 /* MainController.swift in Sources */,
 				C67D2401215B0872008B6790 /* View+Ext.swift in Sources */,
-				C692D6242159227400EEB23D /* ViewController+Navigation+Ext.swift in Sources */,
+				C692D6242159227400EEB23D /* ViewController+Ext.swift in Sources */,
+				C67D2415215CA93C008B6790 /* Card+Ext.swift in Sources */,
+				C67D2428215D36F1008B6790 /* LogRepository.swift in Sources */,
 				C67D2405215B1A15008B6790 /* UICardPrizesLabel.swift in Sources */,
-				C692D62D215930DC00EEB23D /* Store.swift in Sources */,
 				C67D23EF215B0132008B6790 /* UICardHeaderView.swift in Sources */,
+				C67D241F215D3637008B6790 /* DataManager.swift in Sources */,
+				C67D240B215BBE0C008B6790 /* UILogRowView.swift in Sources */,
 				C67D23F3215B0174008B6790 /* UICardView.swift in Sources */,
-				C6F0E35021591D2E00719738 /* BaseController.swift in Sources */,
+				C6F0E35021591D2E00719738 /* Base+Controller.swift in Sources */,
 				C6F0E33821591C5100719738 /* AppDelegate.swift in Sources */,
-				C67D23E2215A3D42008B6790 /* LogModel.swift in Sources */,
-				C692D62B2159273F00EEB23D /* CardModel.swift in Sources */,
-				C67D23E0215A3B61008B6790 /* SlotModel.swift in Sources */,
+				C67D242A215D99B4008B6790 /* Application+Ext.swift in Sources */,
+				C67D23E2215A3D42008B6790 /* Log.swift in Sources */,
+				C692D62B2159273F00EEB23D /* Card.swift in Sources */,
+				C67D23E0215A3B61008B6790 /* Slot.swift in Sources */,
+				C67D240D215BC05D008B6790 /* Label+Ext.swift in Sources */,
 				C67D23EC215B00D5008B6790 /* UITableRowView.swift in Sources */,
+				C67D242C215EF014008B6790 /* Game.swift in Sources */,
 				C67D23E9215AFFE5008B6790 /* CardController.swift in Sources */,
 				C692D628215924E400EEB23D /* LogsController.swift in Sources */,
 				C67D23F7215B01E4008B6790 /* UIBaseLabel.swift in Sources */,
@@ -408,6 +577,7 @@
 		};
 		C6F0E34A21591C5200719738 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0363F210F0227A82864F722E /* Pods-basketball.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -418,14 +588,15 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelvivar.basketball;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "PBA Ending";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		C6F0E34B21591C5200719738 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 376175336AF595720E8D9EE5 /* Pods-basketball.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -436,9 +607,9 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelvivar.basketball;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "PBA Ending";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UITableRowView: UITableViewCell {
+class UITableRowView<T>: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,5 +21,14 @@ class UITableRowView: UITableViewCell {
         // Configure the view for the selected state
         selectionStyle = .none
     }
-
+    
+    var item: T! {
+        didSet {
+            render()
+        }
+    }
+    
+    func render() {
+        
+    }
 }

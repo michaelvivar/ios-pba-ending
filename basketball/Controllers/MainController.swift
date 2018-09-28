@@ -8,78 +8,144 @@
 
 import UIKit
 
-class MainController: TableController, DataManagerDelegate {
-    func reload(with data: Any) {
-        if let card: Card = data as? Card {
-            if let index = cards?.firstIndex(where: { $0.id == card.id}) {
-                cards?[index] = card
-            }
-        }
-        //cards = DataManager.all(Card.self)
+class MainController: TableController<Card, UICardRowView>, UICardRowDelegate, DataCardDelegate {
+    
+    var active: Bool = false
+    
+    func reload(with data: [Card]) {
+        self.data = data
         tableView.reloadData()
+    }
+    
+    func refresh() {
+        /*
+        if let rows = tableView.indexPathsForVisibleRows {
+            tableView.reloadRows(at: rows, with: .top)
+        }
+        */
     }
     
     var cards: [Card]?
 
     override func viewDidLoad() {
+        active = true
         super.viewDidLoad()
         setupNavigationBar()
+        setupNavigationCreateButton()
         setTitle(title: "GAMES")
-        setupTableView()
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [unowned self] _ in
+            self.data = self.cards
+        })
         
-        //Card(id: "HYRDE", game: "Ginebra vs Magnolia", date: Date(), time: "5 PM", bet: 100, status: true, progress: 0, prizes: Prizes(first: 1000, second: 2000, third: 3000, fourth: 4000, reverse: 5000), slots: nil, logs: nil).save()
+        // u+20B1
     }
     
-    /*
-    // MARK: - Navigation
-    */
-}
-
-extension MainController {
-    
-    func setupTableView() {
-        tableView.reloadData()
-        tableView.register(UICardRowView.self, forCellReuseIdentifier: "cell")
+    override func setupTableView() {
+        super.setupTableView()
+        tableView.rowHeight = 100
+        tableView.backgroundColor = UIColor.Hex("EEEEEE")
+        tableView.anchor(top: view.topAnchor, bottom: view.bottomAnchor, left: view.leadingAnchor, right: view.trailingAnchor)
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let data = cards {
-            return data.count
-        }
-        return 0
+    func setupNavigationCreateButton() {
+        let createButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(self.create))
+        createButton.title = ""
+        createButton.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem = createButton
+    }
+    
+    @objc func create() {
+        navigate(page: Page.Form, data: nil)
+    }
+    
+    func didSelectRow(card: Card) {
+        navigate(page: Page.Card, data: card)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = cards?[indexPath.row].game
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UICardRowView
+        if let card = data?[indexPath.row] {
+            cell.item = card
+            cell.delegate = self
+        }
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let data = cards {
-            navigate(page: Page.Card, data: data[indexPath.row])
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if let card = data?[indexPath.row] {
+            let edit = UIContextualAction(style: .normal, title: "") { [unowned self] (contextialAction, view, actionPerformed: (Bool) -> Void) in
+                self.navigate(page: Page.Form, data: card)
+                actionPerformed(true)
+            }
+            edit.backgroundColor = UIColor.Hex("6BB495")
+            edit.image = UIImage(named: "edit.png")
+            return UISwipeActionsConfiguration(actions: [edit])
         }
+        return UISwipeActionsConfiguration(actions: [])
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if let card = cards?[indexPath.row] {
+        if let card = data?[indexPath.row] {
             if (card.status == false) {
-                return UISwipeActionsConfiguration(actions: [])
+                return UISwipeActionsConfiguration(actions: [delete(card: card, indexPath: indexPath)])
             }
             else {
-                return UISwipeActionsConfiguration(actions: [logs(card)])
+                return UISwipeActionsConfiguration(actions: [share(card), logs(card)])
             }
         }
         return UISwipeActionsConfiguration(actions: [])
     }
     
+    private func confirmDelete(card: Card, indexPath: IndexPath) {
+        if let visitor = card.teams["visitor"], let home = card.teams["home"] {
+            let game = visitor.uppercased() + " vs " + home.uppercased()
+            let alert = UIAlertController(title: game, message: card.date.format("EEEE MMM dd, yyyy"), preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let delete = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (action) in
+                card.delete()
+                if let index = self.data?.firstIndex(where: { $0.id == card.id }) {
+                    self.data?.remove(at: index)
+                    self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.right)
+                }
+            }
+            alert.addAction(cancel)
+            alert.addAction(delete)
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    private func delete(card: Card, indexPath: IndexPath) -> UIContextualAction {
+        let delete = UIContextualAction(style: .normal, title: "") { [unowned self] (contextialAction, view, actionPerformed: (Bool) -> Void) in
+            self.confirmDelete(card: card, indexPath: indexPath)
+            actionPerformed(true)
+        }
+        delete.backgroundColor = UIColor.Hex("E23729")
+        delete.image = UIImage(named: "delete.png")
+        return delete
+    }
+    
     private func logs(_ card: Card) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "Logs") { [unowned self] (contextialAction, view, actionPerformed: (Bool) -> Void) in
+        let action = UIContextualAction(style: .normal, title: "") { [unowned self] (contextialAction, view, actionPerformed: (Bool) -> Void) in
             self.navigate(page: Page.Logs, data: card)
             actionPerformed(true)
         }
         action.backgroundColor = UIColor.Hex("136F9A")
+        action.image = UIImage(named: "logs.png")
         return action
+    }
+    
+    private func share(_ card: Card) -> UIContextualAction {
+        var game: String = card.game
+        if let visitor = card.teams["visitor"], let home = card.teams["home"] {
+            game = visitor.uppercased() + "vs" + home.uppercased()
+        }
+        let share = UIContextualAction(style: .normal, title: "") { (contextialAction, view, actionPerformed: (Bool) -> Void) in
+            UIPasteboard.general.string = "https://basketball-ending.tk/pba/" + game.removeSpaces() + "/" + card.id
+            actionPerformed(true)
+        }
+        share.backgroundColor = UIColor.Hex("1E879C")
+        share.image = UIImage(named: "share.png")
+        return share
     }
 }

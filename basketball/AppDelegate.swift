@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,8 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         let controller = MainController()
         window?.rootViewController = UINavigationController(rootViewController: controller)
-        controller.cards = DataManager.all(Card.self)
-        DataManager.delegate = controller
+        
+        FirebaseApp.configure()
+        
+        CardRepository.shared.delegate = controller
+        controller.cards = CardRepository.shared.read()
         
         return true
     }
@@ -42,16 +45,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if let controller = UIApplication.mainController() as? MainController, let active = UIApplication.activeController() {
+            if (controller == active) {
+                controller.refresh()
+            }
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+        //self.saveContext()
     }
 
     // MARK: - Core Data stack
-
+    /*
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
@@ -94,6 +102,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    */
 }
 

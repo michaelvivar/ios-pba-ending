@@ -13,3 +13,7 @@ struct Log: Codable {
     let date: Date
     let data: Slot
 }
+
+struct Logs : Codable {
+    let data: [Log]
+}

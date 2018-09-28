@@ -37,7 +37,8 @@ class UICardHeaderView: UIView {
         dateLabel.format = "EEE - MMM dd"
         dateLabel.time = card.time
         dateLabel.date = card.date
-        betLabel.text = "Php " + card.bet.formatWithComma()
+        let peso: String = "\u{20B1}"
+        betLabel.text = peso + " " + card.bet.formatWithComma()
         prizesLabel.prizes = card.prizes
         
         styles()

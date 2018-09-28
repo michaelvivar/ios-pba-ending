@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardController: UIViewController, CardViewDelegate, CardViewDataSource {
+class CardController: BaseController, CardViewDelegate, CardViewDataSource {
     
     deinit {
         print("De Init: CardController")
@@ -48,13 +48,14 @@ class CardController: UIViewController, CardViewDelegate, CardViewDataSource {
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Enter Name"
             textField.text = slot.name
+            
         }
-        
-        setupSaveBtn(slot: slot, cell: cell, alert: alert, action: action)
         
         if (action == Action.Update) {
             setupPaidBtn(slot: slot, cell: cell, alert: alert)
         }
+        
+        setupSaveBtn(slot: slot, cell: cell, alert: alert, action: action)
         
         present(alert, animated: true, completion: nil)
     }
@@ -67,22 +68,21 @@ class CardController: UIViewController, CardViewDelegate, CardViewDataSource {
             if (slot.name == value) {
                 return
             }
-            cell.name = value
             
             if (action == Action.Add) {
-                self.card = slot.save(in: self.card, name: value)
+                slot.save(in: self.card, name: value)
                 cell.name = value
             }
             else {
                 if (value.isEmpty) {
                     if (slot.paid == false) {
-                        self.card = slot.delete(in: self.card)
+                        slot.delete(in: self.card)
                         cell.name = ""
                     }
                     return
                 }
                 else {
-                    self.card = slot.update(in: self.card, name: value)
+                    slot.update(in: self.card, name: value)
                     cell.name = value
                 }
             }
@@ -91,14 +91,21 @@ class CardController: UIViewController, CardViewDelegate, CardViewDataSource {
     }
     
     func setupPaidBtn(slot: Slot, cell: UICardCellLabel, alert: UIAlertController) {
-        
+        if (slot.paid) {
+            let button = UIAlertAction(title: "Unpaid", style: .destructive, handler: { [unowned self] (action : UIAlertAction!) -> Void in
+                slot.unpaid(in: self.card)
+                cell.paid = false
+            })
+            alert.addAction(button)
+        }
+        else {
+            let button = UIAlertAction(title: "Paid", style: .default, handler: { [unowned self] (action : UIAlertAction!) -> Void in
+                slot.paid(in: self.card)
+                cell.paid = true
+            })
+            alert.addAction(button)
+        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-    */
-
 }
 
 struct Action {

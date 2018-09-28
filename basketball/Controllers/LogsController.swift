@@ -9,36 +9,43 @@
 
 import UIKit
 
-class LogsController: TableController {
+class LogsController: TableController<Log, UILogRowView> {
+    
+    deinit {
+        print("De Init: LogsController")
+    }
     
     var card: Card! {
         didSet {
-            logs = card.logs?.sorted(by: { a, b in a.date.compare(b.date) == .orderedDescending })
+            logs = card.logs
         }
     }
     
-    var logs: [Log]!
+    var logs: [Log]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setTitle(title: "LOGS")
-        tableView.register(UITableRowView.self, forCellReuseIdentifier: "cell")
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return logs.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let log = logs[indexPath.row]
-        cell.textLabel?.text = log.data.number + ": " + log.action + " - " + log.data.name
-        return cell
+        if let visitor = card.teams["visitor"], let home = card.teams["home"] {
+            setTitle(title: visitor.uppercased() + " vs " + home.uppercased())
+        }
+        else {
+            setTitle(title: "LOGS")
+        }
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [unowned self] _ in
+            self.data = self.logs
+            self.styles()
+        })
     }
 
-    /*
-    // MARK: - Navigation
-    */
-
+    func styles() {
+        view.backgroundColor = UIColor.Hex("EEEEEE")
+        tableView.backgroundColor = UIColor.Hex("EEEEEE")
+        tableView.anchor(top: view.topAnchor, bottom: view.bottomAnchor, left: view.leadingAnchor, right: view.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        //tableView.layer.cornerRadius = 5
+        tableView.layer.shadowColor = UIColor.gray.cgColor
+        tableView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        tableView.layer.shadowRadius = 2
+        tableView.layer.shadowOpacity = 0.2
+        tableView.rowHeight = 40
+    }
 }

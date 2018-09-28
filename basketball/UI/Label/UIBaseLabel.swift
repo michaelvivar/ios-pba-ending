@@ -15,5 +15,4 @@ class UIBaseLabel: UILabel {
         self.textColor = color
         self.textAlignment = aligment
     }
-
 }
