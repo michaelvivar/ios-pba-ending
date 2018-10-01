@@ -30,21 +30,12 @@ class FormController: FormViewController {
         }
         else {
             setTitle(title: "CARD")
-            setupSaveButton()
+            setupButtons()
         }
         createForm()
     }
     
-    func setupSaveButton() {
-        /*
-        let saveBtn = UIButton(type: .system)
-        saveBtn.setImage(UIImage(named: "save"), for: .normal)
-        saveBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        saveBtn.tintColor = UIColor.white
-        saveBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.saveData)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveBtn)
-        */
-        
+    func setupButtons() {
         let saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.saveData))
         saveBtn.title = ""
         saveBtn.tintColor = UIColor.white
@@ -56,12 +47,24 @@ class FormController: FormViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if (form.validate().count == 0) {
+            if let card = self.card {
+                _ = self.validate(then: { value in
+                    card.update(game: value.game, date: value.date, time: value.time, bet: value.bet, prizes: value.prizes)
+                })
+            }
+        }
+    }
+    
     @objc func saveData() {
         if (form.validate().count == 0) {
-            if self.validate(), let value = self.value {
-                value.save()
-                self.back()
-            }
+            _ = self.validate(then: { [unowned self] value in
+                CardModel(game: value.game, date: value.date, time: value.time, bet: value.bet, prizes: value.prizes).save({
+                    
+                    self.back()
+                })
+            })
         }
     }
     
@@ -85,17 +88,9 @@ class FormController: FormViewController {
     
     func toggleStatus() {
         if let card = self.card {
-            self.card = card.toggle()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        if (form.validate().count == 0) {
-            if let card = self.card {
-                if self.validate(), let value = self.value {
-                    card.update(game: value.game, date: value.date, time: value.time, bet: value.bet, prizes: value.prizes)
-                }
-            }
+            card.toggle({ [unowned self] card in
+                self.card = card
+            })
         }
     }
     
@@ -259,7 +254,7 @@ extension FormController {
         }
     }
     
-    func validate() -> Bool {
+    func validate(then: @escaping(_ card: Card) -> Void) -> Bool {
         var teamA = ""
         var teamB = ""
         var time = ""
@@ -286,11 +281,6 @@ extension FormController {
             }
         }
         
-        if (teamA.isEmpty || teamB.isEmpty) {
-            return false
-        }
-        
-        guard let date: Date = form.rowBy(tag: "dateRow")?.baseValue as? Date else { return false }
         if let _time: String = form.rowBy(tag: "timeRow")?.baseValue as? String {
             time = _time
         }
@@ -302,6 +292,12 @@ extension FormController {
                 return false
             }
         }
+        
+        if (teamA.isEmpty || teamB.isEmpty || time.isEmpty) {
+            return false
+        }
+        
+        guard let date: Date = form.rowBy(tag: "dateRow")?.baseValue as? Date else { return false }
         guard let bet: Int = form.rowBy(tag: "betRow")?.baseValue as? Int else { return false }
         guard let first: Int = form.rowBy(tag: "firstQtrRow")?.baseValue as? Int else { return false }
         guard let second: Int = form.rowBy(tag: "secondQtrRow")?.baseValue as? Int else { return false }
@@ -311,7 +307,9 @@ extension FormController {
         
         let game = teamA + " vs " + teamB
         
-        self.value = Card(id: "", game: game, date: date, time: time, bet: bet, status: true, progress: 0, prizes: Prizes(first: first, second: second, third: third, fourth: fourth, reverse: reverse), slots: nil, logs: nil)
+        let card = Card(id: "", game: game, date: date, time: time, bet: bet, status: true, progress: 0, prizes: Prizes(firstQtr: first, secondQtr: second, thirdQtr: third, fourthQtr: fourth, reverse: reverse), slots: nil, logs: nil)
+        
+        then(card)
         
         return true
     }

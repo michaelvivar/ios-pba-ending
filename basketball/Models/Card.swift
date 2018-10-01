@@ -21,6 +21,20 @@ struct Card: Codable {
     let logs: [Log]?
 }
 
-struct Cards: Codable {
-    let data: [Card]
+struct CardModel {
+    let id: String
+    let game: String
+    let date: Date
+    let time: String
+    let bet: Int
+    let prizes: Prizes
+    
+    init(game: String, date: Date, time: String, bet: Int, prizes: Prizes) {
+        self.id = ""
+        self.game = game
+        self.date = date
+        self.time = time
+        self.bet = bet
+        self.prizes = prizes
+    }
 }

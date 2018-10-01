@@ -12,8 +12,16 @@ struct Log: Codable {
     let action: String
     let date: Date
     let data: Slot
-}
-
-struct Logs : Codable {
-    let data: [Log]
+    
+    init(action: String, data: Slot) {
+        self.action = action
+        self.data = data
+        self.date = Date()
+    }
+    
+    init(action: String, date: Date, data: Slot) {
+        self.action = action
+        self.date = date
+        self.data = data
+    }
 }

@@ -9,12 +9,12 @@
 import Foundation
 import Firestore
 
-class Cloud {
+class Store {
     
     private init() {}
     
-    private static var firestore: CollectionReference = {
-        return Firestore.firestore().collection("test")
+    static var firestore: CollectionReference = {
+        return Firestore.firestore().collection("games")
     }()
     
     static func save(_ card: Card) {
@@ -25,6 +25,7 @@ class Cloud {
             "time": card.time,
             "bet": card.bet,
             "status": card.status,
+            "progress": card.progress,
             "prizes": [
                 "first": card.prizes.first,
                 "second": card.prizes.second,

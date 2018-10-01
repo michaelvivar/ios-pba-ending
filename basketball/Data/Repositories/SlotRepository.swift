@@ -12,52 +12,57 @@ class SlotRepository {
     
     static let shared = SlotRepository()
     
-    private init() {}
-    
-    func read(for card: Card) -> [Slot] {
-        if let slots = _slots(card) {
-            return slots
-        }
-        else {
-            return [Slot]()
-        }
+    func read(for card: Card, completion: @escaping(_ slots: [Slot]) -> Void) {
+        _slots(for: card, completion)
     }
     
-    func create(slot: Slot, for card: Card) {
-        var slots = read(for: card)
-        slots.append(slot)
-        _save(slots: slots, for: card)
-        Cloud.save(slot: slot, for: card)
-    }
-    
-    func update(slot: Slot, for card: Card) {
-        var slots = read(for: card)
-        if let index = slots.firstIndex(where: { $0.number == slot.number }) {
-            slots[index] = slot
-            _save(slots: slots, for: card)
-            Cloud.save(slot: slot, for: card)
-        }
-    }
-    
-    func delete(slot: Slot, for card: Card) {
-        var slots = read(for: card)
-        if let index = slots.firstIndex(where: { $0.number == slot.number }) {
-            slots.remove(at: index)
-            _save(slots: slots, for: card)
-            Cloud.delete(slot: slot, for: card)
-        }
-    }
-    
-    private func _slots(_ card: Card) -> [Slot]? {
-        if let file = DataManager.load(card.id + "-slots", with: Slots.self) {
-            return file.data
-        }
-        return nil
-    }
-    
-    private func _save(slots: [Slot], for card: Card) {
-        DataManager.save(Slots(data: slots), with: card.id + "-slots", completion: { file in
-            
+    func create(_ slot: Slot, for card: Card, completion: @escaping(_ slots: [Slot]) -> Void) {
+        _slots(for: card, { [unowned self] data in
+            var slots = data
+            slots.append(slot)
+            self._save(slots, for: card, completion: {
+                completion(slots)
+                Store.save(slot: slot, for: card)
+            })
         })
+    }
+    
+    func update(_ slot: Slot, for card: Card, completion: @escaping() -> Void) {
+        _slots(for: card, { [unowned self] data in
+            if let index = data.firstIndex(where: { $0.number == slot.number }) {
+                var slots = data
+                slots[index] = slot
+                self._save(slots, for: card, completion: {
+                    completion()
+                    Store.save(slot: slot, for: card)
+                })
+            }
+        })
+    }
+    
+    func delete(_ slot: Slot, for card: Card, completion: @escaping(_ slots: [Slot]) -> Void) {
+        _slots(for: card, { [unowned self] data in
+            if let index = data.firstIndex(where: { $0.number == slot.number }) {
+                var slots = data
+                slots.remove(at: index)
+                self._save(slots, for: card, completion: {
+                    completion(slots)
+                    Store.delete(slot: slot, for: card)
+                })
+            }
+        })
+    }
+}
+
+extension SlotRepository {
+    
+    private func _slots(for card: Card, _ completion: @escaping(_ cards: [Slot]) -> Void) {
+        DataManager.load(card.id, type: [Slot].self, folder: "slots", completion: { data in
+            completion(data ?? [Slot]())
+        })
+    }
+    
+    private func _save(_ slots: [Slot], for card: Card, completion: @escaping() -> Void) {
+        DataManager.save(slots, name: card.id, folder: "slots", completion: completion)
     }
 }

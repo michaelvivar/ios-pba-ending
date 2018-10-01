@@ -11,52 +11,54 @@ import Foundation
 extension Slot {
     
     func save(in card: Card, name: String) {
-        let slot = Slot(number: self.number, name: name, paid: false, user: "admin");
-        SlotRepository.shared.create(slot: slot, for: card)
-        Log(action: "Create", date: Date(), data: slot).save(in: card)
-        card.update(progress: SlotRepository.shared.read(for: card).count)
+        let slot = Slot(number: self.number, name: name, paid: false, user: "admin")
+        SlotRepository.shared.create(slot, for: card, completion: { slots in
+            card.update(progress: slots.count)
+            Log(action: "Create", data: slot).save(in: card)
+        })
     }
     
     func delete(in card: Card) {
         if (self.paid == false) {
-            SlotRepository.shared.delete(slot: self, for: card)
-            Log(action: "Delete", date: Date(), data: self).save(in: card)
-            card.update(progress: SlotRepository.shared.read(for: card).count)
+            SlotRepository.shared.delete(self, for: card, completion: { slots in
+                card.update(progress: slots.count)
+                Log(action: "Delete", data: self).save(in: card)
+            })
         }
     }
     
-    func paid(in card: Card) {
+    func paid(for card: Card) {
         if (self.paid == false) {
             let slot = clone(with: true)
-            SlotRepository.shared.update(slot: slot, for: card)
-            Log(action: "Paid", date: Date(), data: slot).save(in: card)
-            card.update(progress: SlotRepository.shared.read(for: card).count)
+            SlotRepository.shared.update(slot, for: card, completion: {
+                Log(action: "Paid", data: slot).save(in: card)
+            })
         }
     }
     
-    func unpaid(in card: Card) {
+    func unpaid(for card: Card) {
         if (self.paid == true) {
             let slot = clone(with: false)
-            SlotRepository.shared.update(slot: slot, for: card)
-            Log(action: "Unpaid", date: Date(), data: slot).save(in: card)
-            card.update(progress: SlotRepository.shared.read(for: card).count)
+            SlotRepository.shared.update(slot, for: card, completion: {
+                Log(action: "Unpaid", data: slot).save(in: card)
+            })
         }
     }
     
-    func update(in card: Card, name: String) {
+    func update(for card: Card, name: String) {
         if (self.name != name) {
             let slot = clone(with: name)
-            SlotRepository.shared.update(slot: slot, for: card)
-            Log(action: "Update", date: Date(), data: clone(with: self.name + " > " + name)).save(in: card)
-            card.update(progress: SlotRepository.shared.read(for: card).count)
+            SlotRepository.shared.update(slot, for: card, completion: {
+                Log(action: "Update", data: self.clone(with: self.name + " > " + name)).save(in: card)
+            })
         }
     }
     
     func clone(with name: String) -> Slot {
-        return Slot(number: self.number, name: name, paid: self.paid, user: self.user)
+        return Slot(number: self.number, name: name, paid: self.paid, user: "admin")
     }
     
     func clone(with paid: Bool) -> Slot {
-        return Slot(number: self.number, name: self.name, paid: paid, user: self.user)
+        return Slot(number: self.number, name: self.name, paid: paid, user: "admin")
     }
 }

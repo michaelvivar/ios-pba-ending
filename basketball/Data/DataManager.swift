@@ -10,27 +10,55 @@ import Foundation
 
 class DataManager {
     
-    static fileprivate func getDocumentURL() -> URL {
+    static fileprivate func createDirectory(_ url: URL) {
+        do {
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)
+        }
+        catch {
+            fatalError("Failed to create file directory!")
+        }
+    }
+    
+    static fileprivate func document(_ folder: String = "") -> URL {
         if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            return url
+            if folder.isEmpty {
+                return url
+            }
+            else {
+                let dir = url.appendingPathComponent(folder, isDirectory: true)
+                if (!(FileManager.default.fileExists(atPath: dir.path))) {
+                    createDirectory(dir)
+                }
+                return dir
+            }
         }
         else {
             fatalError("Unable to access file directory!")
         }
     }
     
-    static func save<T:Encodable>(_ object: T, with id: String, completion: @escaping(_ data: T) -> ()) {
-        let url = getDocumentURL().appendingPathComponent(id, isDirectory: false)
+    static func save<T: Encodable>(_ data: T, name: String, folder: String?, completion: @escaping() -> Void) {
+        var url: URL = {
+            if let folder = folder {
+                return document(folder)
+            }
+            else {
+                return document()
+            }
+        }()
+        
+        url.appendPathComponent(name, isDirectory: false)
+        
         let encoder = JSONEncoder()
         
         do {
-            let data = try encoder.encode(object)
+            let data = try encoder.encode(data)
             if FileManager.default.fileExists(atPath: url.path) {
                 try FileManager.default.removeItem(at: url)
             }
             FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
             DispatchQueue.main.async {
-                completion(object)
+                completion()
             }
         }
         catch {
@@ -38,66 +66,51 @@ class DataManager {
         }
     }
     
-    static func load<T:Decodable>(_ id: String, with type: T.Type) -> T? {
-        let url = getDocumentURL().appendingPathComponent(id, isDirectory: false)
+    static func load<T: Decodable>(_ name: String, type: T.Type, folder: String?, completion: @escaping(_ data: T?) -> Void) {
+        var url: URL = {
+            if let folder = folder {
+                return document(folder)
+            }
+            else {
+                return document()
+            }
+        }()
         
-        if !FileManager.default.fileExists(atPath: url.path) {
-            print("file not found at path \(url.path)")
-        }
+        url.appendPathComponent(name, isDirectory: false)
         
         if let data = FileManager.default.contents(atPath: url.path) {
             do {
                 let model = try JSONDecoder().decode(type, from: data)
-                return model
+                completion(model)
             }
             catch {
                 print(error.localizedDescription)
             }
         }
         else {
-            print("Data unavailable at path \(url.path)")
-        }
-        return nil
-    }
-    
-    static func data(_ id: String) -> Data? {
-        let url = getDocumentURL().appendingPathComponent(id, isDirectory: false)
-        if !FileManager.default.fileExists(atPath: url.path) {
-            fatalError("file not found at path \(url.path)")
-        }
-        
-        if let data = FileManager.default.contents(atPath: url.path) {
-            return data
-        }
-        else {
-            fatalError("Data unavailable at path \(url.path)")
+            completion(nil)
+            //print("Data unavailable at path \(url.path)")
         }
     }
     
-    static func all<T:Decodable>(_ type:T.Type) -> [T] {
-        do {
-            let files = try FileManager.default.contentsOfDirectory(atPath: getDocumentURL().path)
-            
-            var data = [T]()
-            
-            for file in files {
-                if let item = load(file, with: type) {
-                    data.append(item)
-                }
+    static func delete(_ name: String, folder: String?, completion: @escaping() -> Void) {
+        var url: URL = {
+            if let folder = folder {
+                return document(folder)
             }
-            return data
-        }
-        catch {
-            print("Could not load any files")
-        }
-        return [T]()
-    }
-    
-    static func delete(_ id: String) {
-        let url = getDocumentURL().appendingPathComponent(id, isDirectory: false)
+            else {
+                return document()
+            }
+        }()
+        
+        url.appendPathComponent(name, isDirectory: false)
+        
         if FileManager.default.fileExists(atPath: url.path) {
             do {
                 try FileManager.default.removeItem(at: url)
+                DispatchQueue.main.async {
+                    completion()
+                }
             }
             catch {
                 print(error.localizedDescription)

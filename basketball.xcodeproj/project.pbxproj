@@ -38,7 +38,6 @@
 		C67D2426215D36D1008B6790 /* SlotRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2425215D36D1008B6790 /* SlotRepository.swift */; };
 		C67D2428215D36F1008B6790 /* LogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2427215D36F1008B6790 /* LogRepository.swift */; };
 		C67D242A215D99B4008B6790 /* Application+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D2429215D99B4008B6790 /* Application+Ext.swift */; };
-		C67D242C215EF014008B6790 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D242B215EF014008B6790 /* Game.swift */; };
 		C692D62021591F7F00EEB23D /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D61F21591F7F00EEB23D /* Color+Ext.swift */; };
 		C692D6242159227400EEB23D /* ViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D6232159227400EEB23D /* ViewController+Ext.swift */; };
 		C692D628215924E400EEB23D /* LogsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692D627215924E400EEB23D /* LogsController.swift */; };
@@ -48,6 +47,7 @@
 		C6F0E34521591C5200719738 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6F0E34321591C5200719738 /* LaunchScreen.storyboard */; };
 		C6F0E34E21591CF600719738 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F0E34D21591CF600719738 /* MainController.swift */; };
 		C6F0E35021591D2E00719738 /* Base+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F0E34F21591D2E00719738 /* Base+Controller.swift */; };
+		C6FACF012161CBF700AC8849 /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FACF002161CBF700AC8849 /* Seeder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,7 +83,6 @@
 		C67D2425215D36D1008B6790 /* SlotRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotRepository.swift; sourceTree = "<group>"; };
 		C67D2427215D36F1008B6790 /* LogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRepository.swift; sourceTree = "<group>"; };
 		C67D2429215D99B4008B6790 /* Application+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Application+Ext.swift"; sourceTree = "<group>"; };
-		C67D242B215EF014008B6790 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		C692D61F21591F7F00EEB23D /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 		C692D6232159227400EEB23D /* ViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Ext.swift"; sourceTree = "<group>"; };
 		C692D627215924E400EEB23D /* LogsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsController.swift; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		C6F0E34621591C5200719738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6F0E34D21591CF600719738 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		C6F0E34F21591D2E00719738 /* Base+Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Base+Controller.swift"; sourceTree = "<group>"; };
+		C6FACF002161CBF700AC8849 /* Seeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		F4152BD0BEE559766DC59339 /* Pods_basketball.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_basketball.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -166,6 +166,7 @@
 				C67D2422215D369C008B6790 /* Repositories */,
 				C67D241E215D3637008B6790 /* DataManager.swift */,
 				C67D2420215D366C008B6790 /* Firestore.swift */,
+				C6FACF002161CBF700AC8849 /* Seeder.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -203,7 +204,6 @@
 				C67D2414215CA93C008B6790 /* Card+Ext.swift */,
 				C67D2416215CA96D008B6790 /* Slot+Ext.swift */,
 				C67D241B215CD337008B6790 /* Log+Ext.swift */,
-				C67D242B215EF014008B6790 /* Game.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -426,6 +426,7 @@
 				C67D2428215D36F1008B6790 /* LogRepository.swift in Sources */,
 				C67D2405215B1A15008B6790 /* UICardPrizesLabel.swift in Sources */,
 				C67D23EF215B0132008B6790 /* UICardHeaderView.swift in Sources */,
+				C6FACF012161CBF700AC8849 /* Seeder.swift in Sources */,
 				C67D241F215D3637008B6790 /* DataManager.swift in Sources */,
 				C67D240B215BBE0C008B6790 /* UILogRowView.swift in Sources */,
 				C67D23F3215B0174008B6790 /* UICardView.swift in Sources */,
@@ -437,7 +438,6 @@
 				C67D23E0215A3B61008B6790 /* Slot.swift in Sources */,
 				C67D240D215BC05D008B6790 /* Label+Ext.swift in Sources */,
 				C67D23EC215B00D5008B6790 /* UITableRowView.swift in Sources */,
-				C67D242C215EF014008B6790 /* Game.swift in Sources */,
 				C67D23E9215AFFE5008B6790 /* CardController.swift in Sources */,
 				C692D628215924E400EEB23D /* LogsController.swift in Sources */,
 				C67D23F7215B01E4008B6790 /* UIBaseLabel.swift in Sources */,

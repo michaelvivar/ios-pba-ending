@@ -14,4 +14,12 @@ struct Prizes: Codable {
     let third: Int
     let fourth: Int
     let reverse: Int
+    
+    init(firstQtr: Int, secondQtr: Int, thirdQtr: Int, fourthQtr: Int, reverse: Int) {
+        self.first = firstQtr
+        self.second = secondQtr
+        self.third = thirdQtr
+        self.fourth = fourthQtr
+        self.reverse = reverse
+    }
 }

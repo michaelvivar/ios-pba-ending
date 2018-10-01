@@ -12,34 +12,18 @@ class LogRepository {
     
     static let shared = LogRepository()
     
-    private init() {}
-    
-    func read(for card: Card) -> [Log] {
-        if let logs = _logs(card) {
-            return logs
-        }
-        else {
-            return [Log]()
-        }
+    func read(for card: Card, completion: @escaping(_ data: [Log]) -> Void) {
+        DataManager.load(card.id, type: [Log].self, folder: "logs", completion: { data in
+            let logs = (data ?? [Log]()).sorted(by: { a, b in a.date.compare(b.date) == .orderedDescending })
+            completion(logs)
+        })
     }
     
-    func create(log: Log, for card: Card) {
-        var logs = read(for: card)
-        logs.append(log)
-        _save(logs: logs, for: card)
-    }
-    
-    private func _logs(_ card: Card) -> [Log]? {
-        if let file = DataManager.load(card.id + "-logs", with: Logs.self) {
-            return file.data.sorted(by: { a, b in a.date.compare(b.date) == .orderedDescending })
-        }
-        return nil
-    }
-    
-    private func _save(logs: [Log], for card: Card) {
-        DataManager.save(Logs(data: logs), with: card.id + "-logs", completion: { file in
-            
+    func create(_ log: Log, for card: Card) {
+        read(for: card, completion: { data in
+            var logs = data
+            logs.append(log)
+            DataManager.save(logs, name: card.id, folder: "logs", completion: {})
         })
     }
 }
-

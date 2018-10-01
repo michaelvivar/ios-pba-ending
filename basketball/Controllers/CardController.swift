@@ -82,7 +82,7 @@ class CardController: BaseController, CardViewDelegate, CardViewDataSource {
                     return
                 }
                 else {
-                    slot.update(in: self.card, name: value)
+                    slot.update(for: self.card, name: value)
                     cell.name = value
                 }
             }
@@ -93,14 +93,14 @@ class CardController: BaseController, CardViewDelegate, CardViewDataSource {
     func setupPaidBtn(slot: Slot, cell: UICardCellLabel, alert: UIAlertController) {
         if (slot.paid) {
             let button = UIAlertAction(title: "Unpaid", style: .destructive, handler: { [unowned self] (action : UIAlertAction!) -> Void in
-                slot.unpaid(in: self.card)
+                slot.unpaid(for: self.card)
                 cell.paid = false
             })
             alert.addAction(button)
         }
         else {
             let button = UIAlertAction(title: "Paid", style: .default, handler: { [unowned self] (action : UIAlertAction!) -> Void in
-                slot.paid(in: self.card)
+                slot.paid(for: self.card)
                 cell.paid = true
             })
             alert.addAction(button)

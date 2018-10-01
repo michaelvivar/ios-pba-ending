@@ -16,17 +16,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        FirebaseApp.configure()
+        
+        CardRepository.shared.read({ [unowned self] cards in
+            if (cards.count == 0) {
+                print("Seeding...")
+                Seeder().initialize({ data in
+                    print("Seeding: Done!")
+                    self.setupController(data)
+                })
+            }
+            else {
+                self.setupController(cards)
+            }
+        })
+        
+        return true
+    }
+    
+    func setupController(_ cards: [Card]) {
         window = UIWindow()
         window?.makeKeyAndVisible()
         let controller = MainController()
         window?.rootViewController = UINavigationController(rootViewController: controller)
-        
-        FirebaseApp.configure()
-        
         CardRepository.shared.delegate = controller
-        controller.cards = CardRepository.shared.read()
-        
-        return true
+        controller.cards = cards
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

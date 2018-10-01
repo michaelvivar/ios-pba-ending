@@ -32,12 +32,12 @@ class MainController: TableController<Card, UICardRowView>, UICardRowDelegate, D
         super.viewDidLoad()
         setupNavigationBar()
         setupNavigationCreateButton()
+        //setupDownloadButton()
         setTitle(title: "GAMES")
         Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [unowned self] _ in
             self.data = self.cards
+            print("Data: Loaded!")
         })
-        
-        // u+20B1
     }
     
     override func setupTableView() {
@@ -52,6 +52,18 @@ class MainController: TableController<Card, UICardRowView>, UICardRowDelegate, D
         createButton.title = ""
         createButton.tintColor = UIColor.white
         navigationItem.rightBarButtonItem = createButton
+    }
+    
+    func setupDownloadButton() {
+        let downloadButton = UIButton(type: .system)
+        downloadButton.setImage(#imageLiteral(resourceName: "download"), for: .normal)
+        downloadButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        downloadButton.tintColor = UIColor.white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: downloadButton)
+    }
+    
+    @objc func sync() {
+        
     }
     
     @objc func create() {
@@ -88,7 +100,7 @@ class MainController: TableController<Card, UICardRowView>, UICardRowDelegate, D
         
         if let card = data?[indexPath.row] {
             if (card.status == false) {
-                return UISwipeActionsConfiguration(actions: [delete(card: card, indexPath: indexPath)])
+                return UISwipeActionsConfiguration(actions: [delete(card: card, indexPath: indexPath), logs(card)])
             }
             else {
                 return UISwipeActionsConfiguration(actions: [share(card), logs(card)])
@@ -103,11 +115,12 @@ class MainController: TableController<Card, UICardRowView>, UICardRowDelegate, D
             let alert = UIAlertController(title: game, message: card.date.format("EEEE MMM dd, yyyy"), preferredStyle: .alert)
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             let delete = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (action) in
-                card.delete()
-                if let index = self.data?.firstIndex(where: { $0.id == card.id }) {
-                    self.data?.remove(at: index)
-                    self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.right)
-                }
+                card.delete({ [unowned self] in
+                    if let index = self.data?.firstIndex(where: { $0.id == card.id }) {
+                        self.data?.remove(at: index)
+                        self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.right)
+                    }
+                })
             }
             alert.addAction(cancel)
             alert.addAction(delete)

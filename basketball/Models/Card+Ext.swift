@@ -10,52 +10,42 @@ import Foundation
 
 extension Card {
     
-    func save() {
-        let id = self.date.format("yyyyMMdd") + "-" + self.generateID()
-        let card = Card(id: id, game: self.game, date: self.date, time: self.time, bet: self.bet, status: true, progress: 0, prizes: self.prizes, slots: nil, logs: nil)
-        
-        CardRepository.shared.create(card: card)
-    }
-    
-    func delete() {
+    func delete(_ then: @escaping() -> Void) {
         if (self.status == false) {
-            CardRepository.shared.delete(card: self)
+            CardRepository.shared.delete(self, completion: then)
         }
     }
     
-    func update(progress: Int) {
-        CardRepository.shared.update(card: clone(with: progress))
-    }
-    
     func update(game: String, date: Date, time: String, bet: Int, prizes: Prizes) {
-        let card = Card(id: self.id, game: game, date: date, time: time, bet: bet, status: self.status, progress: self.progress, prizes: prizes, slots: nil, logs: nil)
-        CardRepository.shared.update(card: card)
+        let card = Card(id: self.id, game: game, date: date, time: time, bet: bet, status: self.status, progress: progress, prizes: prizes, slots: nil, logs: nil)
+        CardRepository.shared.update(card, completion: {})
     }
     
-    func toggle() -> Card {
+    func update(progress: Int) {
+        CardRepository.shared.update(clone(with: progress), completion: {})
+    }
+    
+    func toggle(_ then: @escaping(_ card: Card) -> Void) {
         let card = clone(with: !self.status)
-        CardRepository.shared.update(card: card)
-        return card
+        CardRepository.shared.update(card, completion: {
+            then(card)
+        })
     }
     
     func clone(with progress: Int) -> Card {
-        let card = Card(id: id, game: self.game, date: self.date, time: self.time, bet: self.bet, status: self.status, progress: progress, prizes: self.prizes, slots: nil, logs: nil)
-        return card
+        return Card(id: id, game: self.game, date: self.date, time: self.time, bet: self.bet, status: self.status, progress: progress, prizes: self.prizes, slots: nil, logs: nil)
     }
     
-    func clone(with status: Bool) -> Card {
-        let card = Card(id: id, game: self.game, date: self.date, time: self.time, bet: self.bet, status: status, progress: self.progress, prizes: self.prizes, slots: nil, logs: nil)
-        return card
+    private func clone(with status: Bool) -> Card {
+        return Card(id: id, game: self.game, date: self.date, time: self.time, bet: self.bet, status: status, progress: self.progress, prizes: self.prizes, slots: nil, logs: nil)
     }
     
     func clone(with slots: [Slot]) -> Card {
-        let card = Card(id: id, game: self.game, date: self.date, time: self.time, bet: self.bet, status: self.status, progress: self.progress, prizes: self.prizes, slots: slots, logs: nil)
-        return card
+        return Card(id: id, game: self.game, date: self.date, time: self.time, bet: self.bet, status: self.status, progress: self.progress, prizes: self.prizes, slots: slots, logs: nil)
     }
     
     func clone(with logs: [Log]) -> Card {
-        let card = Card(id: id, game: self.game, date: self.date, time: self.time, bet: self.bet, status: self.status, progress: self.progress, prizes: self.prizes, slots: nil, logs: logs)
-        return card
+        return Card(id: id, game: self.game, date: self.date, time: self.time, bet: self.bet, status: self.status, progress: self.progress, prizes: self.prizes, slots: nil, logs: logs)
     }
     
     var teams: Dictionary<String, String> {
@@ -68,6 +58,15 @@ extension Card {
             }
             return dictionary
         }
+    }
+}
+
+extension CardModel {
+    
+    func save(_ then: @escaping() -> Void) {
+        let id = self.date.format("yyyyMMdd") + "-" + generateID()
+        let card = Card(id: id, game: game, date: date, time: time, bet: bet, status: true, progress: 0, prizes: self.prizes, slots: nil, logs: nil)
+        CardRepository.shared.create(card, completion: then)
     }
     
     private func generateID() -> String {

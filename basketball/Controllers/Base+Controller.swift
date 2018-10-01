@@ -21,17 +21,20 @@ class BaseController: UIViewController {
         if (page == Page.Card) {
             let controller = CardController()
             if let card = data {
-                let slots = SlotRepository.shared.read(for: card)
-                controller.card = card.clone(with: slots)
+                SlotRepository.shared.read(for: card, completion: { slots in
+                    controller.card = card.clone(with: slots)
+                })
             }
             controller.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            //controller.modalTransitionStyle = .crossDissolve
             present(controller, animated: true)
         }
         else if (page == Page.Logs) {
             let controller = LogsController()
             if let card = data {
-                let logs = LogRepository.shared.read(for: card)
-                controller.card = card.clone(with: logs)
+                LogRepository.shared.read(for: card, completion: { logs in
+                    controller.card = card.clone(with: logs)
+                })
             }
             navigationController?.pushViewController(controller, animated: true)
         }

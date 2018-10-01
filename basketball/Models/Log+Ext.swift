@@ -11,6 +11,6 @@ import Foundation
 extension Log {
     
     func save(in card: Card) {
-        LogRepository.shared.create(log: self, for: card)
+        LogRepository.shared.create(self, for: card)
     }
 }
