@@ -22,7 +22,9 @@ class UICardPrizesLabel: UIBaseLabel {
         items.append("2nd: " + prizes.second.formatWithComma())
         items.append("3rd: " + prizes.third.formatWithComma())
         items.append("4th: " + prizes.fourth.formatWithComma())
-        items.append("Rev: " + prizes.reverse.formatWithComma())
+        if prizes.reverse > 0 {
+            items.append("Rev: " + prizes.reverse.formatWithComma())
+        }
         return items.joined(separator: " / ")
     }
 }

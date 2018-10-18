@@ -41,11 +41,11 @@ class UICardCellView: UIView {
         numberLabel.font(size: 13, color: UIColor.white)
         cellLabel.lineBreakMode = .byClipping
         cellLabel.backgroundColor = UIColor.white
-        cellLabel.font(size: 13, color: UIColor.black, aligment: .left)
+        cellLabel.font(type: "DINAlternate-Bold", size: 13, color: UIColor.black, alignment: .left)
     }
     
     private func constraints() {
-        numberLabel.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: self.leadingAnchor, right: nil, padding: .zero, size: .init(width: 23, height: 0))
+        numberLabel.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: self.leadingAnchor, right: nil, padding: .zero, size: .init(width: 19, height: 0))
         cellLabel.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: numberLabel.trailingAnchor, right: self.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 1, right: 0), size: .zero)
     }
     

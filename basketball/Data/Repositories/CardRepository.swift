@@ -29,7 +29,7 @@ class CardRepository {
         })
     }
     
-    func update(_ card: Card, completion: @escaping() -> Void) {
+    func update(_ card: Card, completion: (() -> Void)?) {
         _cards({ [unowned self] data in
             if let index = data.firstIndex(where: { $0.id == card.id }) {
                 var cards = data
@@ -70,9 +70,11 @@ extension CardRepository {
         })
     }
     
-    private func _save(_ cards: [Card], completion: @escaping() -> Void) {
+    private func _save(_ cards: [Card], completion: (() -> Void)?) {
         DataManager.save(cards, name: "cards", folder: nil, completion: { [unowned self] in
-            completion()
+            if let then = completion {
+                then()
+            }
             self.delegate.reload(with: self.sort(cards))
         })
     }

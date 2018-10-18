@@ -37,30 +37,31 @@ class UILogRowView: UITableRowView<Log> {
     
     private func styles() {
         backgroundColor = UIColor.Hex("EEEEEE")
-        if (log.action == "Delete"){
+        if (log.action == "Delete" || log.action == "Erase Bet"){
             numberLabel.backgroundColor = UIColor.Hex("E23729")
         }
-        else if (log.action == "Paid") {
+        else if (log.action == "Paid" || log.action == "Paid Bet") {
             numberLabel.backgroundColor = UIColor.Hex("82C57A")
         }
-        else if (log.action == "Unpaid") {
+        else if (log.action == "Unpaid" || log.action == "Unpaid Bet") {
             numberLabel.backgroundColor = UIColor.Hex("E57642")
         }
-        else if (log.action == "Update") {
+        else if (log.action == "Update" || log.action == "Update Bet") {
             numberLabel.backgroundColor = UIColor.Hex("136F9A")
         }
         else {
             numberLabel.backgroundColor = UIColor.Hex("136F9A")
         }
-        nameLabel.textColor = UIColor.gray
+        //nameLabel.textColor = UIColor.gray
+        nameLabel.font(size: 20, color: UIColor.gray, alignment: .left)
         numberLabel.font(size: 20, color: UIColor.white)
         containerView.backgroundColor = UIColor.white
-        dateLabel.font(size: 11, color: UIColor.lightGray, aligment: .right)
-        actionLabel.font(size: 11, color: UIColor.lightGray, aligment: .right)
+        dateLabel.font(size: 11, color: UIColor.lightGray, alignment: .right)
+        actionLabel.font(size: 11, color: UIColor.lightGray, alignment: .right)
     }
     
     private func constraints() {
-        numberLabel.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: self.leadingAnchor, right: nil, padding: .init(top: 0, left: 0, bottom: 1, right: 0), size: .init(width: 35, height: 0))
+        numberLabel.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: self.leadingAnchor, right: nil, padding: .init(top: 2, left: 0, bottom: 2, right: 0), size: .init(width: 35, height: 0))
         containerView.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: numberLabel.trailingAnchor, right: self.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 1, right: 0))
         nameLabel.anchor(top: containerView.topAnchor, bottom: containerView.bottomAnchor, left: containerView.leadingAnchor, right: containerView.trailingAnchor, padding: .init(top: 0, left: 10, bottom: 0, right: 0))
         dateLabel.anchor(top: containerView.topAnchor, bottom: nil, left: nil, right: containerView.trailingAnchor, padding: .init(top: 2, left: 0, bottom: 0, right: 5))

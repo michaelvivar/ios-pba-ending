@@ -10,9 +10,15 @@ import UIKit
 
 class UIBaseLabel: UILabel {
 
-    func font(size: CGFloat, color: UIColor, aligment: NSTextAlignment = NSTextAlignment.center) {
-        self.font = UIFont(name: "Avenir-Light", size: size)
+    func font(size: CGFloat, color: UIColor, alignment: NSTextAlignment = NSTextAlignment.center) {
+        self.font = UIFont(name: "DINCondensed-Bold", size: size)
         self.textColor = color
-        self.textAlignment = aligment
+        self.textAlignment = alignment
+    }
+    
+    func font(type font: String, size: CGFloat, color: UIColor, alignment: NSTextAlignment = NSTextAlignment.center) {
+        self.font = UIFont(name: font, size: size)
+        self.textColor = color
+        self.textAlignment = alignment
     }
 }

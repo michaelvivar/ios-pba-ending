@@ -18,6 +18,7 @@ extension UIViewController {
         navigationController?.navigationBar.barTintColor = UIColor.blue()
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "DINCondensed-Bold", size: 20)!]
     }
     
     func setupNavigationBackButton(text: String = "", color: UIColor = UIColor.white) {

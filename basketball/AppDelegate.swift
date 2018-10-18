@@ -18,8 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        let seeding = false
+        
         CardRepository.shared.read({ [unowned self] cards in
-            if (cards.count == 0) {
+            if (seeding) {
                 print("Seeding...")
                 Seeder().initialize({ data in
                     print("Seeding: Done!")

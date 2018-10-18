@@ -9,6 +9,22 @@
 import UIKit
 
 class UICardCellLabel: UIBaseLabel {
+    
+    override func drawText(in rect:CGRect) {
+        guard let labelText = text else {  return super.drawText(in: rect) }
+        
+        let attributedText = NSAttributedString(string: labelText, attributes: [NSAttributedString.Key.font: font])
+        var newRect = rect
+        newRect.size.height = attributedText.boundingRect(with: rect.size, options: .usesLineFragmentOrigin, context: nil).size.height
+        
+        if numberOfLines != 0 {
+            //newRect.size.height = min(newRect.size.height, CGFloat(numberOfLines) * font.lineHeight)
+        }
+        
+        newRect.size.height = 25
+        
+        super.drawText(in: newRect)
+    }
 
     var name: String {
         get {
@@ -16,11 +32,11 @@ class UICardCellLabel: UIBaseLabel {
         }
         set {
             text = newValue.isEmpty ? "" : " " + newValue
-            if (newValue.count > 7) {
-                font = UIFont.systemFont(ofSize: 13)
+            if (newValue.count > 12) {
+                font(size: 13, color: UIColor.black, alignment: .left)
             }
             else {
-                font = UIFont.systemFont(ofSize: 15)
+                font(size: 15, color: UIColor.black, alignment: .left)
             }
         }
     }

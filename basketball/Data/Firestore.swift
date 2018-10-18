@@ -14,7 +14,7 @@ class Store {
     private init() {}
     
     static var firestore: CollectionReference = {
-        return Firestore.firestore().collection("games")
+        return Firestore.firestore().collection("nba") // games
     }()
     
     static func save(_ card: Card) {
@@ -39,8 +39,7 @@ class Store {
     }
     
     static func delete(_ card: Card) {
-        //firestore.document(card.id).updateData([ "deleted": true ])
-        firestore.document(card.id).delete()
+        firestore.document(card.id).updateData([ "deleted": true ])
     }
     
     static func save(slot: Slot, for card: Card) {

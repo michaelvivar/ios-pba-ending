@@ -25,7 +25,7 @@ class UICardRowView: UITableRowView<Card> {
         self.addSubview(containerView)
         containerView.layer.shadowColor = UIColor.gray.cgColor
         containerView.layer.shadowOffset = CGSize(width: 1, height: 1)
-        containerView.layer.shadowRadius = 2
+        containerView.layer.shadowRadius = 1
         containerView.layer.shadowOpacity = 0.2
         containerView.backgroundColor = UIColor.white
         containerView.addSubview(dateLabel)
@@ -45,16 +45,17 @@ class UICardRowView: UITableRowView<Card> {
         visitorLabel.text = self.card.teams["visitor"]
         versusLabel.text = "vs"
         homeLabel.text = self.card.teams["home"]
-        progressView.progress = Float(card.progress) / 100
+        progressView.setProgress(Float(card.progress) / 100, animated: true)
     }
     
     private func styles() {
-        dateLabel.font(size: 10, color: UIColor.orange(), aligment: .right)
-        dateLabel.font = UIFont.boldSystemFont(ofSize: 10)
-        betLabel.font(size: 15, color: UIColor.blue(), aligment: .right)
-        visitorLabel.font(size: 20, color: UIColor.blue())
-        versusLabel.font(size: 14, color: UIColor.blue())
-        homeLabel.font(size: 20, color: UIColor.blue())
+        dateLabel.font = UIFont(name: "DINCondensed-Bold", size: 12)
+        dateLabel.textAlignment = .right
+        dateLabel.textColor = UIColor.orange()
+        betLabel.font(size: 14, color: UIColor.blue(), alignment: .right)
+        visitorLabel.font(size: 17, color: UIColor.blue())
+        versusLabel.font(size: 12, color: UIColor.blue())
+        homeLabel.font(size: 17, color: UIColor.blue())
         progressView.progressTintColor = UIColor.orange()
         progressView.trackTintColor = UIColor.blue()
         progressView.progress = Float(0)
@@ -73,11 +74,11 @@ class UICardRowView: UITableRowView<Card> {
     private func constraints() {
         containerView.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, padding: .init(top: 5, left: 0, bottom: 5, right: 0))
         dateLabel.anchor(top: containerView.topAnchor, bottom: nil, left: containerView.leadingAnchor, right: containerView.trailingAnchor, padding: .init(top: 5, left: 0, bottom: 0, right: 10))
-        betLabel.anchor(top: containerView.topAnchor, bottom: nil, left: containerView.leadingAnchor, right: nil, padding: .init(top: 3, left: 10, bottom: 0, right: 0))
-        versusLabel.anchor(top: nil, bottom: nil, left: containerView.leadingAnchor, right: containerView.trailingAnchor, padding: .zero, size: .init(width: 0, height: 14))
+        betLabel.anchor(top: containerView.topAnchor, bottom: nil, left: containerView.leadingAnchor, right: nil, padding: .init(top: 5, left: 10, bottom: 0, right: 0))
+        versusLabel.anchor(top: nil, bottom: nil, left: containerView.leadingAnchor, right: containerView.trailingAnchor, padding: .zero, size: .zero)
         versusLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        visitorLabel.anchor(top: nil, bottom: versusLabel.topAnchor, left: containerView.leadingAnchor, right: containerView.trailingAnchor, padding: .zero, size: .init(width: 0, height: 23))
-        homeLabel.anchor(top: versusLabel.bottomAnchor, bottom: nil, left: containerView.leadingAnchor, right: containerView.trailingAnchor, padding: .zero, size: .init(width: 0, height: 23))
+        visitorLabel.anchor(top: nil, bottom: versusLabel.topAnchor, left: containerView.leadingAnchor, right: containerView.trailingAnchor, padding: .zero, size: .zero)
+        homeLabel.anchor(top: versusLabel.bottomAnchor, bottom: nil, left: containerView.leadingAnchor, right: containerView.trailingAnchor, padding: .init(top: 2, left: 0, bottom: 0, right: 0), size: .zero)
         progressView.anchor(top: nil, bottom: containerView.bottomAnchor, left: containerView.leadingAnchor, right: containerView.trailingAnchor, padding: .init(top: 0, left: 10, bottom: 5, right: 10))
     }
     

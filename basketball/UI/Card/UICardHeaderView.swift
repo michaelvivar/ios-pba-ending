@@ -55,22 +55,23 @@ class UICardHeaderView: UIView {
     }
     
     private func styles() {
-        gameLabel.font(size: 23, color: UIColor.white)
+        gameLabel.font(type: "DINAlternate-Bold", size: 23, color: .white)
         dateLabel.font(size: 12, color: UIColor.white)
-        betLabel.font(size: 18, color: UIColor.white)
-        prizesLabel.backgroundColor = UIColor.Hex("F56D03")
-        prizesLabel.font(size: 13, color: .white)
+        betLabel.font(type: "DINAlternate-Bold", size: 20, color: .white)
+        //prizesLabel.backgroundColor = UIColor.Hex("F56D03")
+        prizesLabel.backgroundColor = UIColor.Hex("C62828")
+        prizesLabel.font(type: "DINAlternate-Bold", size: 15, color: .white)
     }
     
     private func constraints() {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         dateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -6).isActive = true
-        dateLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        dateLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
         gameLabel.anchor(top: nil, bottom: dateLabel.topAnchor, left: self.leadingAnchor, right: self.trailingAnchor)
-        gameLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        //gameLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
         betLabel.anchor(top: dateLabel.bottomAnchor, bottom: nil, left: self.leadingAnchor, right: self.trailingAnchor)
-        betLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
-        prizesLabel.anchor(top: nil, bottom: self.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor)
+        //betLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        prizesLabel.anchor(top: nil, bottom: self.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, padding: .zero, size: .init(width: 0, height: 20))
     }
 }

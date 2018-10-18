@@ -18,6 +18,7 @@ class MainController: TableController<Card, UICardRowView>, UICardRowDelegate, D
     }
     
     func refresh() {
+        tableView.reloadData()
         /*
         if let rows = tableView.indexPathsForVisibleRows {
             tableView.reloadRows(at: rows, with: .top)
@@ -42,7 +43,7 @@ class MainController: TableController<Card, UICardRowView>, UICardRowDelegate, D
     
     override func setupTableView() {
         super.setupTableView()
-        tableView.rowHeight = 100
+        tableView.rowHeight = 80
         tableView.backgroundColor = UIColor.Hex("EEEEEE")
         tableView.anchor(top: view.topAnchor, bottom: view.bottomAnchor, left: view.leadingAnchor, right: view.trailingAnchor)
     }
@@ -154,7 +155,7 @@ class MainController: TableController<Card, UICardRowView>, UICardRowDelegate, D
             game = visitor.uppercased() + "vs" + home.uppercased()
         }
         let share = UIContextualAction(style: .normal, title: "") { (contextialAction, view, actionPerformed: (Bool) -> Void) in
-            UIPasteboard.general.string = "https://basketball-ending.tk/pba/" + game.removeSpaces() + "/" + card.id
+            UIPasteboard.general.string = "https://basketball-ending.tk/nba/" + game.removeSpaces() + "/" + card.id
             actionPerformed(true)
         }
         share.backgroundColor = UIColor.Hex("1E879C")

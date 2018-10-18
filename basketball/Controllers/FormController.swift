@@ -40,11 +40,13 @@ class FormController: FormViewController {
         saveBtn.title = ""
         saveBtn.tintColor = UIColor.white
         navigationItem.rightBarButtonItem = saveBtn
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "DINCondensed-Bold", size: 20)!], for: .normal)
         
         let backButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.back))
         backButton.title = ""
         backButton.tintColor = UIColor.white
         navigationItem.leftBarButtonItem = backButton
+        navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "DINCondensed-Bold", size: 20)!], for: .normal)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

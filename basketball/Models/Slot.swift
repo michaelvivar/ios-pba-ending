@@ -14,7 +14,3 @@ struct Slot: Codable {
     let paid: Bool
     let user: String
 }
-
-struct Slots: Codable {
-    let data: [Slot]
-}

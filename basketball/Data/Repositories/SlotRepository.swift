@@ -62,7 +62,7 @@ extension SlotRepository {
         })
     }
     
-    private func _save(_ slots: [Slot], for card: Card, completion: @escaping() -> Void) {
+    private func _save(_ slots: [Slot], for card: Card, completion: (() -> Void)?) {
         DataManager.save(slots, name: card.id, folder: "slots", completion: completion)
     }
 }

@@ -37,7 +37,7 @@ class DataManager {
         }
     }
     
-    static func save<T: Encodable>(_ data: T, name: String, folder: String?, completion: @escaping() -> Void) {
+    static func save<T: Encodable>(_ data: T, name: String, folder: String?, completion: (() -> Void)?) {
         var url: URL = {
             if let folder = folder {
                 return document(folder)
@@ -56,9 +56,13 @@ class DataManager {
             if FileManager.default.fileExists(atPath: url.path) {
                 try FileManager.default.removeItem(at: url)
             }
-            FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
-            DispatchQueue.main.async {
-                completion()
+            DispatchQueue.global(qos: .userInteractive).async {
+                FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
+                DispatchQueue.main.async {
+                    if let then = completion {
+                        then()
+                    }
+                }
             }
         }
         catch {

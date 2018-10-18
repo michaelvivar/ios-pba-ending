@@ -18,11 +18,11 @@ extension Card {
     
     func update(game: String, date: Date, time: String, bet: Int, prizes: Prizes) {
         let card = Card(id: self.id, game: game, date: date, time: time, bet: bet, status: self.status, progress: progress, prizes: prizes, slots: nil, logs: nil)
-        CardRepository.shared.update(card, completion: {})
+        CardRepository.shared.update(card, completion: nil)
     }
     
     func update(progress: Int) {
-        CardRepository.shared.update(clone(with: progress), completion: {})
+        CardRepository.shared.update(clone(with: progress), completion: nil)
     }
     
     func toggle(_ then: @escaping(_ card: Card) -> Void) {

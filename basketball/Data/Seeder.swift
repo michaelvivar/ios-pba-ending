@@ -32,7 +32,9 @@ class Seeder {
                         guard let thirdQtr = prizes["third"] as? Int else { return nil }
                         guard let fourthQtr = prizes["fourth"] as? Int else { return nil }
                         guard let reverse = prizes["reverse"] as? Int else { return nil }
-                        let card = Card(id: doc.documentID, game: game, date: date, time: time,
+                        let deleted = (data["deleted"] as? Bool) ?? false
+                        let id = deleted ? "" : doc.documentID
+                        let card = Card(id: id, game: game, date: date, time: time,
                                         bet: bet, status: status, progress: progress,
                                         prizes: Prizes(firstQtr: firstQtr, secondQtr: secondQtr, thirdQtr: thirdQtr, fourthQtr: fourthQtr, reverse: reverse),
                                         slots: nil, logs: nil
@@ -40,9 +42,10 @@ class Seeder {
                         return card
                     })
                     if let cards = cards {
-                        DataManager.save(cards, name: "cards", folder: nil, completion: {
-                            then(cards)
-                            cards.forEach({ [unowned self] in
+                        let filtered = cards.filter({ $0.id != "" })
+                        DataManager.save(filtered, name: "cards", folder: nil, completion: {
+                            then(filtered)
+                            filtered.forEach({ [unowned self] in
                                 self.slots($0)
                                 self.logs($0)
                             })

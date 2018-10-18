@@ -14,7 +14,7 @@ extension Slot {
         let slot = Slot(number: self.number, name: name, paid: false, user: "admin")
         SlotRepository.shared.create(slot, for: card, completion: { slots in
             card.update(progress: slots.count)
-            Log(action: "Create", data: slot).save(in: card)
+            Log(action: "Add Bet", data: slot).save(in: card)
         })
     }
     
@@ -22,7 +22,7 @@ extension Slot {
         if (self.paid == false) {
             SlotRepository.shared.delete(self, for: card, completion: { slots in
                 card.update(progress: slots.count)
-                Log(action: "Delete", data: self).save(in: card)
+                Log(action: "Erase Bet", data: self).save(in: card)
             })
         }
     }
@@ -31,7 +31,7 @@ extension Slot {
         if (self.paid == false) {
             let slot = clone(with: true)
             SlotRepository.shared.update(slot, for: card, completion: {
-                Log(action: "Paid", data: slot).save(in: card)
+                Log(action: "Paid Bet", data: slot).save(in: card)
             })
         }
     }
@@ -40,7 +40,7 @@ extension Slot {
         if (self.paid == true) {
             let slot = clone(with: false)
             SlotRepository.shared.update(slot, for: card, completion: {
-                Log(action: "Unpaid", data: slot).save(in: card)
+                Log(action: "Unpaid Bet", data: slot).save(in: card)
             })
         }
     }
@@ -49,7 +49,7 @@ extension Slot {
         if (self.name != name) {
             let slot = clone(with: name)
             SlotRepository.shared.update(slot, for: card, completion: {
-                Log(action: "Update", data: self.clone(with: self.name + " > " + name)).save(in: card)
+                Log(action: "Update Bet", data: self.clone(with: self.name + " > " + name)).save(in: card)
             })
         }
     }
