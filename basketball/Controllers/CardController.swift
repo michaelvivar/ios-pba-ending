@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import Firestore;
 
 class CardController: BaseController, CardViewDelegate, CardViewDataSource {
     
     deinit {
         print("De Init: CardController")
+        listener.remove();
     }
 
     var card: Card!
+    var listener: FIRListenerRegistration!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +25,7 @@ class CardController: BaseController, CardViewDelegate, CardViewDataSource {
         setupPanGesture()
         setupCardView()
         // Do any additional setup after loading the view.
+        addListener(card)
     }
     
     let cardView: UICardView = {
@@ -105,6 +109,32 @@ class CardController: BaseController, CardViewDelegate, CardViewDataSource {
             })
             alert.addAction(button)
         }
+    }
+    
+    private func addListener(_ card: Card) {
+        listener = Store.firestore.document(card.id).collection("slots").addSnapshotListener({ [unowned self]
+            snapshot, error in
+            if let error = error {
+                print(error)
+            }
+            else {
+                if let snapshot = snapshot {
+                    let slots: [Slot]? = snapshot.documents.compactMap({ doc in
+                        let data = doc.data() as [String: Any]
+                        guard let number = data["number"] as? String else { return nil }
+                        guard let name = data["name"] as? String else { return nil }
+                        guard let paid = data["paid"] as? Bool else { return nil }
+                        guard let user = data["user"] as? String else { return nil }
+                        let slot = Slot(number: number, name: name, paid: paid, user: user)
+                        return slot
+                    })
+                    if let slots = slots {
+                        self.cardView.contentView.reload(slots)
+                        DataManager.save(slots, name: card.id, folder: "slots", completion: {})
+                    }
+                }
+            }
+        })
     }
 }
 

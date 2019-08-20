@@ -75,6 +75,16 @@ class MainController: TableController<Card, UICardRowView>, UICardRowDelegate, D
         navigate(page: Page.Card, data: card)
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let transform = CATransform3DTranslate(CATransform3DIdentity, 0, 30, 0)
+        cell.layer.transform = transform
+        cell.alpha = 0.5
+        UIView.animate(withDuration: 0.75, animations: {
+            cell.layer.transform = CATransform3DIdentity
+            cell.alpha = 1.0
+        })
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UICardRowView
         if let card = data?[indexPath.row] {

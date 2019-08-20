@@ -19,6 +19,10 @@ class UICardContentView: UIView {
     }
     
     func reload(_ slots: [Slot]) {
+        cells.forEach({ cell in
+            cell.value.cellLabel.name = ""
+            cell.value.cellLabel.paid = false
+        })
         slots.forEach({ [unowned self] slot in
             if let item = self.cells[slot.number] {
                 item.cellLabel.name = slot.name

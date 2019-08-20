@@ -8,11 +8,13 @@
 
 import UIKit
 import Firebase
+import Firestore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var listener: FIRListenerRegistration!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -53,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        listener.remove()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -63,7 +66,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         if let controller = UIApplication.mainController() as? MainController, let active = UIApplication.activeController() {
             if (controller == active) {
-                controller.refresh()
+                // controller.refresh()
+                addListener({ data in
+                    CardRepository.shared.read({ cards in
+                        controller.reload(with: cards);
+                    })
+                })
             }
         }
     }
@@ -119,5 +127,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     */
+    
+    func addListener(_ then: @escaping(_ cards: [Card]) -> Void) {
+        listener = Store.firestore.addSnapshotListener({
+            snapshot, error in
+            if let error = error {
+                print(error)
+            }
+            else {
+                if let snapshot = snapshot {
+                    let cards: [Card]? = snapshot.documents.compactMap({ doc in
+                        let data = doc.data() as [String: Any]
+                        guard let game = data["game"] as? String else { return nil }
+                        guard let date = data["date"] as? Date else { return nil }
+                        guard let time = data["time"] as? String else { return nil }
+                        guard let bet = data["bet"] as? Int else { return nil }
+                        guard let status = data["status"] as? Bool else { return nil }
+                        guard let progress = data["progress"] as? Int else { return nil }
+                        guard let prizes = data["prizes"] as? [String : Any] else { return nil }
+                        guard let firstQtr = prizes["first"] as? Int else { return nil }
+                        guard let secondQtr = prizes["second"] as? Int else { return nil }
+                        guard let thirdQtr = prizes["third"] as? Int else { return nil }
+                        guard let fourthQtr = prizes["fourth"] as? Int else { return nil }
+                        guard let reverse = prizes["reverse"] as? Int else { return nil }
+                        let deleted = (data["deleted"] as? Bool) ?? false
+                        let id = deleted ? "" : doc.documentID
+                        let card = Card(id: id, game: game, date: date, time: time,
+                                        bet: bet, status: status, progress: progress,
+                                        prizes: Prizes(firstQtr: firstQtr, secondQtr: secondQtr, thirdQtr: thirdQtr, fourthQtr: fourthQtr, reverse: reverse),
+                                        slots: nil, logs: nil
+                        )
+                        return card
+                    })
+                    if let cards = cards {
+                        let filtered = cards.filter({ $0.id != "" })
+                        DataManager.save(filtered, name: "cards", folder: nil, completion: {
+                            then(filtered)
+                        })
+                    }
+                }
+            }
+        })
+    }
 }
 

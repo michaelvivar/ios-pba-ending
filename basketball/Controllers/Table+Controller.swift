@@ -68,6 +68,10 @@ class TableController<T, U: UITableRowView<T>>: BaseController, UITableViewDataS
         return nil
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+    }
+    
     func setupTableView() {
         tableView.isHidden = true
         tableView.separatorStyle = .none

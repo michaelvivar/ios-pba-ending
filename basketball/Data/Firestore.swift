@@ -14,7 +14,7 @@ class Store {
     private init() {}
     
     static var firestore: CollectionReference = {
-        return Firestore.firestore().collection("nba") // games
+        return Firestore.firestore().collection("games") // games
     }()
     
     static func save(_ card: Card) {
